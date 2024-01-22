@@ -2,7 +2,7 @@
 
 <robot name="arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-	<xacro:include filename="$(find s5a_main)/urdf/helper_macros.xacro"/>
+	<xacro:include filename="$(find s3a_main)/urdf/helper_macros.xacro"/>
 
 	<gazebo>
 		<plugin name="ros_control" filename="libgazebo_ros_control.so">
@@ -96,17 +96,65 @@
 		size="40" L="400"
 		roll="90" z="${40/2}" y="${+(400/2-40/2)}"
 	/>
-	<xacro:invisible_joint
+
+
+
+	<xacro:weld
 		parent="beam2_forearm"
-		name="fixjoint2_hand_ee"
-		child="beam2_hand_ee"
-		roll="-90" yaw="+90" z="${40/2}" y="${+(400-40/2)}"
+		name="weld2_upper_arm"
+		child="bearing2_upper_arm"
+		pitch="180" yaw="-90" y="${+(400-2*50/2)}"
 	/>
+
+	<xacro:bearing
+		name="bearing2_upper_arm"
+		L="10" z="5"
+	/>
+
+	<xacro:joint
+		parent="bearing2_upper_arm"
+		name="joint3_elbow"
+		child="beam3_forearm"
+		lo_lim="-50"
+		up_lim="80"
+		yaw="180" z="10"
+	/>
+
 	<xacro:beam
-		name="beam2_hand_ee"
+		name="beam3_forearm"
+		size="40" L="100"
+		roll="90" z="${40/2}" y="${+(100/2-40/2)}"
+	/>
+
+
+
+
+	<xacro:weld
+		parent="beam3_forearm"
+		name="weld3_arm"
+		child="bearing3_upper_arm"
+		roll="90" z="20" y="${+(100-20)}"
+	/>
+	<xacro:bearing
+		name="bearing3_upper_arm"
+		L="10" z="1"
+	/>
+
+	<xacro:joint
+		parent="bearing3_upper_arm"
+		name="wrist_arm"
+		child="hand_ee"
+		lo_lim="-90"
+		up_lim="90"
+		 z="10" pitch="90"
+	/>
+
+
+	<xacro:beam
+		name="hand_ee"
 		mat="alu_ee"
 		size="40" L="30"
-		pitch="90" x="${30/2}"
+		pitch="0" x="${30/2}" roll="180" yaw = "180"
 	/>
 
 	<xacro:include filename="$(find s5a_main)/urdf/hand.urdf.xacro"/>
