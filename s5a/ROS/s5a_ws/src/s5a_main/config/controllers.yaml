@@ -2,15 +2,16 @@ s5a:
     joints_fb:
         type: joint_state_controller/JointStateController
         publish_rate: 25
-    
+
     jog_pos_ctrl:
         type: position_controllers/JointGroupPositionController
         joints:
             - joint0_shoulder_pan
             - joint1_shoulder_lift
             - joint2_elbow
-            - joint3_index_finger
-    
+            - joint3_wrist_flap
+            - joint4_wrist_rot
+            - joint5_index_finger
     traj_pos_ctrl:
         arm:
             type: position_controllers/JointTrajectoryController
@@ -18,6 +19,8 @@ s5a:
                 - joint0_shoulder_pan
                 - joint1_shoulder_lift
                 - joint2_elbow
+                - joint3_wrist_flap
+                - joint4_wrist_rot
             constraints:
                 goal_time: 0.6
                 stopped_velocity_tolerance: 0 # rad/s
@@ -30,8 +33,8 @@ s5a:
         hand:
             type: position_controllers/JointTrajectoryController
             joints:
-                - joint3_index_finger
-                - joint4_middle_finger
+                - joint5_index_finger
+                - joint6_middle_finger
             constraints:
                 goal_time: 0.6
                 stopped_velocity_tolerance: 0 # rad/s
@@ -40,11 +43,12 @@ s5a:
             stop_trajectory_duration: 0.5
             state_publish_rate: 25
             action_monitor_rate: 10
-    
+
     servo_pos_ctrl:
         type: position_controllers/JointGroupPositionController
         joints:
             - joint0_shoulder_pan
             - joint1_shoulder_lift
             - joint2_elbow
-            
+            - joint3_wrist_flap
+            - joint4_wrist_rot

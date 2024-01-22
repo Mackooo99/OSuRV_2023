@@ -17,10 +17,9 @@ on_rpi = run_for_stdout('lsb_release -i') == 'Distributor ID:	Raspbian\n'
 
 arm_main = f'{ARM}_main'
 if not on_rpi:
-	if ARM == 's3a':
+	if ARM in ['s3a', 's5a']:
 		arm_main = f'{ARM}_serial_main'
-	elif ARM == 's5a':
-		arm_main = f'{ARM}_serial_main'
+
 
 _settings = {
 	'SIM': SIM,
@@ -28,7 +27,6 @@ _settings = {
 	'arm_main': arm_main,
 	'on_laptop' : on_laptop,
 }
-
 
 
 _layout = [
@@ -147,8 +145,8 @@ _targets = {
 				''',
 			'teleop': '''
 				# Joypad must have analog on.
-				#roslaunch arm_teleop jog_teleop.launch name:=${ARM}
-				roslaunch arm_teleop servo_teleop.launch name:=${ARM}
+				roslaunch arm_teleop jog_teleop.launch name:=${ARM}
+				#roslaunch arm_teleop servo_teleop.launch name:=${ARM}
 				#roslaunch vision_teleop vision_teleop.launch name:=${ARM}
 				''',
 			'joint_echo': '''

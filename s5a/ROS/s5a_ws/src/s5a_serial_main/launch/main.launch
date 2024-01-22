@@ -97,7 +97,7 @@
 
 	<arg name="plotjuggler_cfg" value="plot/all.xml"/>
 	<node
-if="true"
+if="false"
 		name="plotjuggler"
 		pkg="plotjuggler"
 		type="plotjuggler"

@@ -113,7 +113,7 @@
 
 	<xacro:joint
 		parent="bearing2_upper_arm"
-		name="joint3_elbow"
+		name="joint3_wrist_flap"
 		child="beam3_forearm"
 		lo_lim="-50"
 		up_lim="80"
@@ -142,7 +142,7 @@
 
 	<xacro:joint
 		parent="bearing3_upper_arm"
-		name="wrist_arm"
+		name="joint4_wrist_rot"
 		child="hand_ee"
 		lo_lim="-90"
 		up_lim="90"

@@ -19,7 +19,7 @@ def prerequisites(ctx):
 	d = os.path.dirname(os.path.realpath(__file__))
 	s = os.path.join(d, 'install_arduino.sh')
 	ctx.exec_command2(s + ' basic')
-	
+
 	#TODO arduino-cli on ARDUINO_LIBS
 
 ###############################################################################
@@ -39,7 +39,7 @@ def parse_arduino_cfg(fn):
 			if line2 == '':
 				continue
 
-			m = re.match('([\w\.]+)=(.*)', line2)
+			m = re.match('([\w\.-]+)=(.*)', line2)
 			key_path = m.group(1)
 			raw_value = m.group(2).lstrip().rstrip()
 
@@ -97,12 +97,12 @@ def _search_for_libs(ctx):
 			if l:
 				std_libs.append(l)
 				continue
-			
+
 			l = arch_std_libs_d.find_node(lib)
 			if l:
 				std_libs.append(l)
 				continue
-			
+
 			if zip_libs_d:
 				ls = zip_libs_d.ant_glob(lib + '*.zip')
 				if len(ls) > 0:
@@ -111,7 +111,7 @@ def _search_for_libs(ctx):
 					continue
 			ctx.fatal('No installed lib "{}"!'.format(lib))
 	return std_libs, zip_libs
-	
+
 
 def configure(cfg):
 	cfg.start_msg('Checking for Arduino installation')
@@ -245,7 +245,7 @@ def configure(cfg):
 		'-DARDUINO_ARCH_{}'.format(build_arch),
 	]
 	cfg.env.CXXFLAGS += f
-	
+
 	std_libs, zip_libs = _search_for_libs(cfg)
 	if len(zip_libs) > 0:
 		cfg.start_msg('Unpacking zip libs')
@@ -257,7 +257,7 @@ def configure(cfg):
 			if r:
 				cfg.fatal('Fail unpacking "{}"!'.format(zip_fn))
 		cfg.end_msg('Done', 'GREEN')
-	
+
 
 def build(bld):
 	ard_src_dir = bld.root.find_node(bld.env.ARDUINO_CORE)

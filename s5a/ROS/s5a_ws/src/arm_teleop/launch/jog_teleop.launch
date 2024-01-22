@@ -19,7 +19,7 @@
 			<remap from="calib" to="/$(arg name)/calib" />
 		</node>
 	</group>
-	<group if="$(eval arg('name') == 's3a')">
+	<group if="$(eval arg('name') == 's3a' or arg('name') == 's5a')">
 		<node
 			name="jog_teleop"
 			pkg="arm_teleop"

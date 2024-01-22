@@ -92,3 +92,4 @@ Jog Teleop:
 
 		# L stick D- U+
 		self.axis = data.axes[1] # In range [-1, 1]
+		

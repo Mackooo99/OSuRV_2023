@@ -5,7 +5,7 @@
 
 	<xacro:joint
 		parent="hand_ee"
-		name="joint3_index_finger"
+		name="joint5_index_finger"
 		child="beam3_index_finger"
 		lo_lim="0"
 		up_lim="70"
@@ -20,7 +20,7 @@
 
 	<xacro:joint
 		parent="hand_ee"
-		name="joint4_middle_finger"
+		name="joint6_middle_finger"
 		child="beam4_middle_finger"
 		lo_lim="0"
 		up_lim="70"

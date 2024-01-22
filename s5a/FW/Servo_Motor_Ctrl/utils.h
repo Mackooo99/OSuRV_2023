@@ -1,0 +1,18 @@
+
+#ifndef UTILS_H
+#define UTILS_H
+
+///////////////////////////////////////////////////////////////////////////////
+
+#define DEBUG(x) \
+	do{ \
+		Serial.print(#x" = "); Serial.println(x); \
+	}while(0)
+#define DEBUG_HEX(x) \
+	do{ \
+		Serial.print(#x" = "); Serial.println(x, HEX); \
+	}while(0)
+
+///////////////////////////////////////////////////////////////////////////////
+
+#endif // UTILS_H
